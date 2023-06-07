@@ -1,0 +1,54 @@
+config:
+  target: "http://localhost:8080/api/products"
+  phases:
+    - duration: 60
+      arrivalRate: 5
+
+scenarios:
+  - name: "Successful API request"
+    flow:
+      - delete: "/{id}"
+        headers:
+          Content-Type: "application/json"
+        capture:
+          - json: "$.id"
+            as: "id"
+        expect:
+          - statusCode: 200
+    # This scenario should successfully delete a product and return a 200 status code
+
+  - name: "API request with non-existing product"
+    flow:
+      - delete: "/{id}"
+        headers:
+          Content-Type: "application/json"
+        capture:
+          - json: "$.id"
+            as: "id"
+        expect:
+          - statusCode: 404
+    # This scenario should attempt to delete a non-existing product and return a 404 status code
+
+  - name: "API request with invalid ID"
+    flow:
+      - delete: "/{id}"
+        headers:
+          Content-Type: "application/json"
+        capture:
+          - json: "$.id"
+            as: "id"
+        expect:
+          - statusCode: 400
+    # This scenario should attempt to delete a product with an invalid ID and return a 400 status code
+
+  - name: "API request with edge case - large ID"
+    flow:
+      - delete: "/{id}"
+        headers:
+          Content-Type: "application/json"
+        capture:
+          - json: "$.id"
+            as: "id"
+        expect:
+          - statusCode: 404
+    # This scenario should attempt to delete a product with a large ID and return a 404 status code

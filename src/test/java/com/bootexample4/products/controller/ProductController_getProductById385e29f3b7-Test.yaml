@@ -1,0 +1,52 @@
+config:
+  target: "http://localhost:8080/api/products"
+  phases:
+    - duration: 60
+      arrivalRate: 5
+
+scenarios:
+  - name: "Successful API request"
+    flow:
+      - get:
+          url: "/2"
+          headers:
+            Content-Type: "application/json"
+          capture:
+            json: "$.id"
+            as: "productId"
+          expect:
+            - statusCode: 200
+            - equals:
+                - "productId"
+                - 2
+      - log: "Retrieving product by ID: {{ productId }}"
+
+  - name: "API request for non-existent product"
+    flow:
+      - get:
+          url: "/99999"
+          headers:
+            Content-Type: "application/json"
+          expect:
+            - statusCode: 404
+      - log: "Non-existent product not found."
+
+  - name: "API request with invalid ID"
+    flow:
+      - get:
+          url: "/invalid_id"
+          headers:
+            Content-Type: "application/json"
+          expect:
+            - statusCode: 400
+      - log: "Invalid ID provided."
+
+  - name: "API request with edge case: large ID"
+    flow:
+      - get:
+          url: "/99999999999999999999"
+          headers:
+            Content-Type: "application/json"
+          expect:
+            - statusCode: 404
+      - log: "Large ID not found."

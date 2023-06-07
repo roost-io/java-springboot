@@ -1,0 +1,57 @@
+config:
+  target: "http://localhost:8080/api/products"
+  phases:
+    - duration: 60
+      arrivalRate: 5
+
+scenarios:
+  - name: "Successful API request"
+    flow:
+      - put:
+          url: "/2"
+          json:
+            name: "applenew"
+            description: "apple"
+            price: 50.0
+          headers:
+            content-type: "application/json"
+          capture:
+            - json: "$"
+              as: "response"
+          expect:
+            - statusCode: 200
+            - equals:
+                - "response.name": "applenew"
+                - "response.description": "apple"
+                - "response.price": 50.0
+
+  - name: "API request with validation failure"
+    flow:
+      - put:
+          url: "/2"
+          json:
+            description: "apple"
+            price: 50.0
+          headers:
+            content-type: "application/json"
+          expect:
+            - statusCode: 400
+            - hasProperty: "errorMessage"
+
+  - name: "API request with edge case"
+    flow:
+      - put:
+          url: "/2"
+          json:
+            name: "applenew!@#$%^&*()"
+            description: "apple"
+            price: 50.0
+          headers:
+            content-type: "application/json"
+          capture:
+            - json: "$"
+              as: "response"
+          expect:
+            - statusCode: 200
+            - matchRegexp:
+                - "response.name": "^applenew[!@#$%^&*()]+$"
