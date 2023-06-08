@@ -1,0 +1,39 @@
+config:
+  target: "http://localhost:8080"
+  phases:
+    - duration: 60
+      arrivalRate: 5
+
+scenarios:
+  - name: "Successful API request"
+    flow:
+      - get:
+          url: "/api/products"
+          headers:
+            Accept: "application/json"
+          expect:
+            - statusCode: 200
+            - hasProperty: "products"
+
+  - name: "API request with validation failure"
+    flow:
+      - get:
+          url: "/api/invalid"
+          headers:
+            Accept: "application/json"
+          expect:
+            - statusCode: 400
+            - hasProperty: "errorMessage"
+
+  - name: "API request with edge case"
+    flow:
+      - get:
+          url: "/api/products?filter=*&limit=10000"
+          headers:
+            Accept: "application/json"
+          expect:
+            - statusCode: "{{ status }}"
+            - hasProperty: "products"
+            - equals:
+                - "{{ products.length }}"
+                - 10000

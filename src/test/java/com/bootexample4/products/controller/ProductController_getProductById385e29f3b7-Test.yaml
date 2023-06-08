@@ -1,0 +1,44 @@
+config:
+  target: "http://localhost:8080/api/products"
+  phases:
+    - duration: 60
+      arrivalRate: 5
+
+scenarios:
+  - name: "Successful API request"
+    flow:
+      - get:
+          url: "/2"
+          headers:
+            Content-Type: "application/json"
+          capture:
+            - json: "$.id"
+              as: "productId"
+            - json: "$.name"
+              as: "productName"
+          expect:
+            - statusCode: 200
+            - equals:
+                - "productId"
+                - 2
+            - equals:
+                - "productName"
+                - "Sample Product"
+
+  - name: "API request with not found"
+    flow:
+      - get:
+          url: "/9999"
+          headers:
+            Content-Type: "application/json"
+          expect:
+            - statusCode: 404
+
+  - name: "API request with edge case - large ID"
+    flow:
+      - get:
+          url: "/9223372036854775807"
+          headers:
+            Content-Type: "application/json"
+          expect:
+            - statusCode: 404

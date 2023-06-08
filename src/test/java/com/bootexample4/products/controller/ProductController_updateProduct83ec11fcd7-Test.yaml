@@ -1,0 +1,67 @@
+config:
+  target: "https://example.com/api/products"
+  phases:
+    - duration: 60
+      arrivalRate: 10
+  ensure:
+    p99: 200
+    maxErrorRate: 1
+
+scenarios:
+  - name: "Successful API request"
+    flow:
+      - put:
+          url: "/2"
+          json:
+            id: 2
+            name: "applenew"
+            description: "apple"
+            price: 50.0
+          headers:
+            Content-Type: "application/json"
+          capture:
+            - json: "$.id"
+              as: "productId"
+          expect:
+            - statusCode: 200
+            - hasProperty: "name"
+            - equals:
+                - "applenew"
+                - "{{ productId }}"
+
+  - name: "API request with validation failure"
+    flow:
+      - put:
+          url: "/2"
+          json:
+            id: 2
+            description: "apple"
+            price: 50.0
+          headers:
+            Content-Type: "application/json"
+          expect:
+            - statusCode: 400
+            - hasProperty: "message"
+            - equals:
+                - "Validation error: Missing required field 'name'"
+
+  - name: "API request with edge case"
+    flow:
+      - put:
+          url: "/2"
+          json:
+            id: 2
+            name: "apple#@!$%^&*"
+            description: "apple with special characters"
+            price: 1234567890.123456
+          headers:
+            Content-Type: "application/json"
+          capture:
+            - json: "$.id"
+              as: "productId"
+          expect:
+            - statusCode: 200
+            - hasProperty: "name"
+            - matchRegexp:
+                - "apple#@!$%^&*"
+                - "{{ productId }}"

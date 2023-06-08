@@ -1,0 +1,45 @@
+config:
+  target: "http://localhost:8080/api/products"
+  phases:
+    - duration: 60
+      arrivalRate: 10
+  ensure:
+    p95: 200
+    maxErrorRate: 1
+
+scenarios:
+  - name: "Successful API request"
+    flow:
+      - delete:
+          url: "/3"
+          headers:
+            Content-Type: "application/json"
+          capture:
+            - json: "$"
+              as: "response"
+          expect:
+            - statusCode: 200
+
+  - name: "API request with non-existent product"
+    flow:
+      - delete:
+          url: "/3434"
+          headers:
+            Content-Type: "application/json"
+          capture:
+            - json: "$"
+              as: "response"
+          expect:
+            - statusCode: 404
+
+  - name: "API request with edge case (large ID)"
+    flow:
+      - delete:
+          url: "/9999999999999999999"
+          headers:
+            Content-Type: "application/json"
+          capture:
+            - json: "$"
+              as: "response"
+          expect:
+            - statusCode: 404

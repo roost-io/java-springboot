@@ -1,0 +1,55 @@
+config:
+  target: "http://localhost:8080/api/products"
+  phases:
+    - duration: 60
+      arrivalRate: 1
+
+scenarios:
+  - name: "Successful API request"
+    flow:
+      - post:
+          headers:
+            content-type: "application/json"
+          json:
+            id: 1
+            name: "apple"
+            description: "apple"
+            price: 50.0
+          capture:
+            json: "$.id"
+            as: "createdProductId"
+          expect:
+            - statusCode: 200
+            - hasProperty: "id"
+
+  - name: "API request with validation failure"
+    flow:
+      - post:
+          headers:
+            content-type: "application/json"
+          json:
+            id: 2
+            name: "1"
+            description: "apple"
+            price: ""
+          expect:
+            - statusCode: 400
+            - hasProperty: "error"
+
+  - name: "API request with edge case"
+    flow:
+      - post:
+          headers:
+            content-type: "application/json"
+          json:
+            id: 3
+            name: "apple"
+            description: "apple with special chars: !@#$%^&*()"
+            price: 50.0
+          capture:
+            json: "$.id"
+            as: "createdProductId"
+          expect:
+            - statusCode: 200
+            - hasProperty: "id"
+            - equals: ["$.description", "apple with special chars: !@#$%^&*()"]
