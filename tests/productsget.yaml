@@ -1,0 +1,72 @@
+config:
+  target: "https://example.com"
+  phases:
+    - duration: 60
+      arrivalRate: 5
+
+scenarios:
+  - name: "Successful API request"
+    flow:
+      - post:
+          url: "/products"
+          json:
+            name: "Test Product"
+            price: 10.99
+            description: "A test product"
+          headers:
+            Content-Type: "application/json"
+          capture:
+            - json: "$"
+              as: "response"
+          expect:
+            - statusCode: 200
+            - equals:
+                - "response.name"
+                - "Test Product"
+            - equals:
+                - "response.price"
+                - 10.99
+            - equals:
+                - "response.description"
+                - "A test product"
+
+  - name: "API request with validation failure"
+    flow:
+      - post:
+          url: "/products"
+          json:
+            name: ""
+            price: 10.99
+            description: "A test product"
+          headers:
+            Content-Type: "application/json"
+          capture:
+            - json: "$"
+              as: "response"
+          expect:
+            - statusCode: 400
+            - equals:
+                - "response.message"
+                - "Name field is required"
+
+  - name: "API request with edge case"
+    flow:
+      - post:
+          url: "/products"
+          json:
+            name: "Test Product with special characters !@#$%^&*()"
+            price: 10.99
+            description: "A test product with a very long description that exceeds the maximum character limit allowed by the system. This should test how the system handles large data inputs and whether it can successfully process the request or return an appropriate error message if it fails to do so."
+          headers:
+            Content-Type: "application/json"
+          capture:
+            - json: "$"
+              as: "response"
+          expect:
+            - statusCode: 200
+            - matchRegexp:
+                - "response.name"
+                - "^Test Product with special characters"
+            - matchRegexp:
+                - "response.description"
+                - "^A test product with a very long description"

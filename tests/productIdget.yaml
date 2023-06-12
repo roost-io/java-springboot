@@ -1,0 +1,51 @@
+config:
+  target: "https://api.example.com"
+  phases:
+    - duration: 60
+      arrivalRate: 20
+
+scenarios:
+  - name: "Successful API request"
+    flow:
+      - get:
+          url: "/products/{{ $randomNumber(1, 100) }}"
+          headers:
+            Content-Type: "application/json"
+        expect:
+          - statusCode: 200
+          - hasProperty: "name"
+          - hasProperty: "price"
+          - hasProperty: "description"
+
+  - name: "API request with non-existent product"
+    flow:
+      - get:
+          url: "/products/{{ $randomNumber(1000, 2000) }}"
+          headers:
+            Content-Type: "application/json"
+        expect:
+          - statusCode: 404
+          - hasProperty: "error"
+          - equals: "{{ response.body.error }}": "Product not found"
+
+  - name: "API request with invalid product ID"
+    flow:
+      - get:
+          url: "/products/invalid_id"
+          headers:
+            Content-Type: "application/json"
+        expect:
+          - statusCode: 400
+          - hasProperty: "error"
+          - equals: "{{ response.body.error }}": "Invalid product ID"
+
+  - name: "API request with edge case: large product ID"
+    flow:
+      - get:
+          url: "/products/{{ $randomNumber(1, 100000000000000000000) }}"
+          headers:
+            Content-Type: "application/json"
+        expect:
+          - statusCode: 400
+          - hasProperty: "error"
+          - equals: "{{ response.body.error }}": "Invalid product ID"

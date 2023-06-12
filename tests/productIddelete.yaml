@@ -1,0 +1,61 @@
+config:
+  target: "https://example.com"
+  phases:
+    - duration: 60
+      arrivalRate: 5
+
+scenarios:
+  - name: "Successful API request"
+    flow:
+      - get:
+          url: "/products/1"
+          headers:
+            Content-Type: "application/json"
+        expect:
+          - statusCode: 200
+          - hasProperty: "name"
+          - hasProperty: "price"
+
+  - name: "API request with non-existent product"
+    flow:
+      - get:
+          url: "/products/9999"
+          headers:
+            Content-Type: "application/json"
+        expect:
+          - statusCode: 404
+          - equals:
+              errorMessage: "Product not found"
+
+  - name: "API request with invalid product ID"
+    flow:
+      - get:
+          url: "/products/invalid_id"
+          headers:
+            Content-Type: "application/json"
+        expect:
+          - statusCode: 400
+          - equals:
+              errorMessage: "Invalid product ID"
+
+  - name: "API request with edge case: large product ID"
+    flow:
+      - get:
+          url: "/products/99999999999999999999"
+          headers:
+            Content-Type: "application/json"
+        expect:
+          - statusCode: 400
+          - equals:
+              errorMessage: "Product ID is too large"
+
+  - name: "API request with edge case: special characters in product ID"
+    flow:
+      - get:
+          url: "/products/!@#$%^&*()"
+          headers:
+            Content-Type: "application/json"
+        expect:
+          - statusCode: 400
+          - equals:
+              errorMessage: "Invalid characters in product ID"
