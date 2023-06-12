@@ -1,0 +1,42 @@
+config:
+  target: "http://example.com/api"
+  phases:
+    - duration: 60
+      arrivalRate: 10
+
+scenarios:
+  - name: "Successful API request"
+    flow:
+      - get:
+          url: "/products/3"
+          headers:
+            Content-Type: "application/json"
+          expect:
+            - statusCode: 200
+            - hasProperty: "productId"
+            - equals:
+                productId: 3
+
+  - name: "API request with product not found"
+    flow:
+      - get:
+          url: "/products/3434"
+          headers:
+            Content-Type: "application/json"
+          expect:
+            - statusCode: 404
+            - hasProperty: "message"
+            - equals:
+                message: "Product not found"
+
+  - name: "API request with edge case"
+    flow:
+      - get:
+          url: "/products/!@#$%^&*()"
+          headers:
+            Content-Type: "application/json"
+          expect:
+            - statusCode: 400
+            - hasProperty: "message"
+            - match:
+                message: "Invalid product ID"

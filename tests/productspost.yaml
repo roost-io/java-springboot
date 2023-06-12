@@ -1,0 +1,56 @@
+config:
+  target: "http://localhost:8080/api"
+  phases:
+    - duration: 60
+      arrivalRate: 5
+
+scenarios:
+  - name: "Successful API request"
+    flow:
+      - post:
+          url: "/products"
+          json:
+            id: 4
+            name: "apple"
+            description: "apple"
+            price: 50.0
+          headers:
+            Content-Type: "application/json"
+          capture:
+            json: "$.id"
+            as: "productId"
+          expect:
+            - statusCode: 201
+            - hasProperty: "id"
+
+  - name: "API request with validation failure"
+    flow:
+      - post:
+          url: "/products"
+          json:
+            id: 5
+            name: ""
+            description: "apple"
+            price: 50.0
+          headers:
+            Content-Type: "application/json"
+          expect:
+            - statusCode: 400
+            - hasProperty: "error"
+            - equals: ["$.error", "Name cannot be empty"]
+
+  - name: "API request with edge case"
+    flow:
+      - post:
+          url: "/products"
+          json:
+            id: 6
+            name: "!@#$%^&*()_+{}|:\"?><`~-=[]\\;',./"
+            description: "apple"
+            price: 50.0
+          headers:
+            Content-Type: "application/json"
+          expect:
+            - statusCode: 201
+            - hasProperty: "id"
+            - matchRegexp: ["$.name", "^[\x21-\x7E]+$"]
