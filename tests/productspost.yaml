@@ -1,0 +1,58 @@
+config:
+  target: "https://example.com/api"
+  phases:
+    - duration: 60
+      arrivalRate: 5
+
+scenarios:
+  - name: "Successful API request"
+    flow:
+      - post:
+          url: "/products"
+          json:
+            id: 1
+            name: "Apple"
+            description: "Fresh apple"
+            price: 25.0
+          headers:
+            Content-Type: "application/json"
+        expect:
+          - statusCode: 200
+          - hasProperty: "id"
+          - hasProperty: "name"
+          - hasProperty: "description"
+          - hasProperty: "price"
+
+  - name: "API request with validation failure"
+    flow:
+      - post:
+          url: "/products"
+          json:
+            id: 2
+            description: "Fresh banana"
+            price: 30.0
+          headers:
+            Content-Type: "application/json"
+        expect:
+          - statusCode: 400
+          - hasProperty: "error"
+          - equals: "{{ response.body.error }}": "Name is required."
+
+  - name: "API request with edge case"
+    flow:
+      - post:
+          url: "/products"
+          json:
+            id: 3
+            name: "Special & Unique @#$%^&* Product"
+            description: "This is an edge case product with special characters and a very long description. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ultrices ipsum non mattis pharetra. Integer laoreet non felis sit amet pharetra. Integer mollis eget felis non finibus. Nullam nibh mauris, fermentum vitae felis vehicula, aliquam bibendum sapien."
+            price: 9999.99
+          headers:
+            Content-Type: "application/json"
+        expect:
+          - statusCode: 200
+          - hasProperty: "id"
+          - hasProperty: "name"
+          - hasProperty: "description"
+          - hasProperty: "price"
+          - equals: "{{ response.body.name }}": "Special & Unique @#$%^&* Product"

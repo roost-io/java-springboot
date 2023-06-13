@@ -1,0 +1,54 @@
+config:
+  target: "http://example.com"
+  phases:
+    - duration: 60
+      arrivalRate: 20
+
+scenarios:
+  - name: "Successful API request"
+    flow:
+      - delete:
+          url: "/products/4"
+          headers:
+            Content-Type: "application/json"
+          expect:
+            - statusCode: 200
+            - hasProperty: "message"
+            - equals:
+                message: "Deleted product"
+
+  - name: "API request with validation failure"
+    flow:
+      - delete:
+          url: "/products/invalid_id"
+          headers:
+            Content-Type: "application/json"
+          expect:
+            - statusCode: 400
+            - hasProperty: "error"
+            - equals:
+                error: "Invalid product ID"
+
+  - name: "API request with edge case"
+    flow:
+      - delete:
+          url: "/products/!@#$%^&*()"
+          headers:
+            Content-Type: "application/json"
+          expect:
+            - statusCode: 400
+            - hasProperty: "error"
+            - equals:
+                error: "Invalid product ID"
+
+  - name: "API request with large data"
+    flow:
+      - delete:
+          url: "/products/12345678901234567890"
+          headers:
+            Content-Type: "application/json"
+          expect:
+            - statusCode: 404
+            - hasProperty: "error"
+            - equals:
+                error: "Product not found"

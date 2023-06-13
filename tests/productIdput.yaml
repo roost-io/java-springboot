@@ -1,0 +1,76 @@
+config:
+  target: 'https://api.example.com'
+  phases:
+    - duration: 60
+      arrivalRate: 5
+
+scenarios:
+  - name: 'Successful API request'
+    flow:
+      - post:
+          url: '/products/4'
+          json:
+            id: 4
+            name: 'Product 1'
+            description: 'mango'
+            price: 50.0
+          headers:
+            Content-Type: 'application/json'
+          capture:
+            - json: '$'
+              as: 'response'
+          assert:
+            - statusCode: 200
+            - equals:
+                - response.id
+                - 4
+            - equals:
+                - response.name
+                - 'Product 1'
+            - equals:
+                - response.description
+                - 'mango'
+            - equals:
+                - response.price
+                - 50.0
+
+  - name: 'API request with validation failure'
+    flow:
+      - post:
+          url: '/products/9'
+          json:
+            id: 9
+            description: 'mango'
+          headers:
+            Content-Type: 'application/json'
+          capture:
+            - json: '$'
+              as: 'response'
+          assert:
+            - statusCode: 400
+            - match:
+                - response.error
+                - 'Missing required fields'
+
+  - name: 'API request with edge case'
+    flow:
+      - post:
+          url: '/products/3434'
+          json:
+            id: 3434
+            name: 'Product with special characters !@#$%^&*()'
+            description: 'A very long description with more than 500 characters. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque volutpat, mi et vehicula ullamcorper, sapien purus faucibus odio, nec tincidunt enim quam ut metus. Sed euismod sapien id libero tincidunt, a feugiat libero lacinia. In hac habitasse platea dictumst. Sed.'
+            price: 50.0
+          headers:
+            Content-Type: 'application/json'
+          capture:
+            - json: '$'
+              as: 'response'
+          assert:
+            - statusCode: 200
+            - match:
+                - response.name
+                - 'Product with special characters !@#$%^&*()'
+            - match:
+                - response.description
+                - 'A very long description with more than 500 characters. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque volutpat, mi et vehicula ullamcorper, sapien purus faucibus odio, nec tincidunt enim quam ut metus. Sed euismod sapien id libero tincidunt, a feugiat libero lacinia. In hac habitasse platea dictumst. Sed.'

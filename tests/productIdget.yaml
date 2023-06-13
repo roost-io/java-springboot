@@ -1,0 +1,44 @@
+config:
+  target: "http://localhost:8080"
+  phases:
+    - duration: 60
+      arrivalRate: 10
+
+scenarios:
+  - name: "Successful API request"
+    flow:
+      - get:
+          url: "/api/products/4"
+          headers:
+            Content-Type: "application/json"
+          expect:
+            - statusCode: 200
+            - hasProperty: "id"
+            - hasProperty: "name"
+            - hasProperty: "description"
+            - hasProperty: "price"
+
+  - name: "API request with non-existent product"
+    flow:
+      - get:
+          url: "/api/products/232"
+          headers:
+            Content-Type: "application/json"
+          expect:
+            - statusCode: 404
+
+  - name: "API request with edge case"
+    flow:
+      - get:
+          url: "/api/products/2"
+          headers:
+            Content-Type: "application/json"
+          expect:
+            - statusCode: 200
+            - hasProperty: "id"
+            - hasProperty: "name"
+            - hasProperty: "description"
+            - hasProperty: "price"
+            - equals:
+                jsonPath: "$.name"
+                value: "apple"
