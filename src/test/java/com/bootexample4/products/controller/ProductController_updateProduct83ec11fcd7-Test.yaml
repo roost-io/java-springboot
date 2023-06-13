@@ -1,0 +1,69 @@
+config:
+  target: "http://localhost:8080/api/products"
+  phases:
+    - duration: 60
+      arrivalRate: 5
+
+scenarios:
+  - name: "Successful API request"
+    flow:
+      - put:
+          url: "/2"
+          json:
+            name: "applenew"
+            description: "apple"
+            price: 50.0
+          headers:
+            Content-Type: "application/json"
+          capture:
+            - json: "$"
+              as: "response"
+          # Expected behavior: The API should return status code 200 and the updated product data
+      - think: 1
+      - assert:
+          - statusCode: 200
+          - equals:
+              - response.name: "applenew"
+              - response.description: "apple"
+              - response.price: 50.0
+
+  - name: "API request with validation failure"
+    flow:
+      - put:
+          url: "/2"
+          json:
+            name: ""
+            description: "apple"
+            price: 50.0
+          headers:
+            Content-Type: "application/json"
+          capture:
+            - json: "$"
+              as: "response"
+          # Expected behavior: The API should return status code 400 and an error message
+      - think: 1
+      - assert:
+          - statusCode: 400
+          - response.message: "Invalid input"
+
+  - name: "API request with edge case"
+    flow:
+      - put:
+          url: "/2"
+          json:
+            name: "apple$%^&*"
+            description: "apple"
+            price: 50.0
+          headers:
+            Content-Type: "application/json"
+          capture:
+            - json: "$"
+              as: "response"
+          # Expected behavior: The API should return an acceptable status code and the updated product data
+      - think: 1
+      - assert:
+          - statusCode: 200
+          - equals:
+              - response.name: "apple$%^&*"
+              - response.description: "apple"
+              - response.price: 50.0
