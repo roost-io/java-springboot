@@ -1,0 +1,63 @@
+config:
+  target: "https://api.example.com"
+  phases:
+    - duration: 60
+      arrivalRate: 5
+
+scenarios:
+  - name: "Successful API request"
+    flow:
+      - post:
+          url: "/products"
+          json:
+            name: "Test Product"
+            description: "This is a test product"
+            price: 10.99
+          headers:
+            Content-Type: "application/json"
+          expect:
+            - statusCode: 200
+            - hasProperty: "id"
+            - hasProperty: "name"
+            - hasProperty: "description"
+            - hasProperty: "price"
+            - equals:
+                - "Test Product"
+                - "{{ response.body.name }}"
+
+  - name: "API request with validation failure"
+    flow:
+      - post:
+          url: "/products"
+          json:
+            description: "This is a test product"
+            price: 10.99
+          headers:
+            Content-Type: "application/json"
+          expect:
+            - statusCode: 400
+            - hasProperty: "error"
+            - equals:
+                - "Missing required field: name"
+                - "{{ response.body.error }}"
+
+  - name: "API request with edge case"
+    flow:
+      - post:
+          url: "/products"
+          json:
+            name: "Test Product with special characters: !@#$%^&*()"
+            description: "This is a test product with a very long description. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet."
+            price: 9999.99
+          headers:
+            Content-Type: "application/json"
+          expect:
+            - statusCode: "{{ gt(199) }}"
+            - statusCode: "{{ lt(300) }}"
+            - hasProperty: "id"
+            - hasProperty: "name"
+            - hasProperty: "description"
+            - hasProperty: "price"
+            - equals:
+                - "Test Product with special characters: !@#$%^&*()"
+                - "{{ response.body.name }}"

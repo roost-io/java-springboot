@@ -1,0 +1,54 @@
+config:
+  target: "https://api.example.com"
+  phases:
+    - duration: 60
+      arrivalRate: 5
+
+scenarios:
+  - name: "Successful API request"
+    flow:
+      - post:
+          url: "/products"
+          json:
+            name: "Product A"
+            price: 100
+          headers:
+            Content-Type: "application/json"
+          capture:
+            - json: "$.id"
+              as: "productId"
+          expect:
+            - statusCode: 200
+            - hasProperty: "id"
+            - hasProperty: "name"
+            - hasProperty: "price"
+
+  - name: "API request with validation failure"
+    flow:
+      - post:
+          url: "/products"
+          json:
+            name: ""
+            price: 100
+          headers:
+            Content-Type: "application/json"
+          expect:
+            - statusCode: 400
+            - hasProperty: "error"
+            - equals: ["$.error.message", "Name is required"]
+
+  - name: "API request with edge case"
+    flow:
+      - post:
+          url: "/products"
+          json:
+            name: "Product with special characters!@#$%^&*()_+"
+            price: 9999999999
+          headers:
+            Content-Type: "application/json"
+          expect:
+            - statusCode: 200
+            - hasProperty: "id"
+            - hasProperty: "name"
+            - hasProperty: "price"
+            - match: ["$.name", "/^[a-zA-Z0-9!@#\\$%\\^&\\*\\(\\)_\\+]+$/"]

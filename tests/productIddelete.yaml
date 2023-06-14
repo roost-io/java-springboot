@@ -1,0 +1,40 @@
+config:
+  target: "https://api.example.com"
+  phases:
+    - duration: 60
+      arrivalRate: 5
+
+scenarios:
+  - name: "Successful API request"
+    flow:
+      - get:
+          url: "/products/{{ $randomNumber(1, 100) }}"
+          headers:
+            Content-Type: "application/json"
+          capture:
+            - json: "$.data"
+              as: "product"
+      - think: 1
+      - log: "Product data: {{ product }}"
+
+  - name: "API request with validation failure"
+    flow:
+      - get:
+          url: "/products/invalid"
+          headers:
+            Content-Type: "application/json"
+          expect:
+            - statusCode: 400
+            - hasProperty: "errorMessage"
+      - think: 1
+
+  - name: "API request with edge case"
+    flow:
+      - get:
+          url: "/products/{{ $randomString(10) }}"
+          headers:
+            Content-Type: "application/json"
+          expect:
+            - statusCode: "{{ $between(200, 500) }}"
+            - hasProperty: "data"
+      - think: 1

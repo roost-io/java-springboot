@@ -1,0 +1,61 @@
+config:
+  target: "https://example.com"
+  phases:
+    - duration: 60
+      arrivalRate: 5
+
+scenarios:
+  - name: "Successful API request"
+    flow:
+      - get:
+          url: "/products/{{ $randomString() }}"
+          headers:
+            Content-Type: "application/json"
+        expect:
+          - statusCode: 200
+          - hasProperty: "productName"
+          - hasProperty: "price"
+
+  - name: "API request with non-existent product"
+    flow:
+      - get:
+          url: "/products/non-existent-product"
+          headers:
+            Content-Type: "application/json"
+        expect:
+          - statusCode: 404
+          - hasProperty: "error"
+          - equals: ["error", "Product not found"]
+
+  - name: "API request with invalid productId"
+    flow:
+      - get:
+          url: "/products/invalid-id"
+          headers:
+            Content-Type: "application/json"
+        expect:
+          - statusCode: 400
+          - hasProperty: "error"
+          - equals: ["error", "Invalid product ID"]
+
+  - name: "API request with edge case: long productId"
+    flow:
+      - get:
+          url: "/products/{{ $randomString(1000) }}"
+          headers:
+            Content-Type: "application/json"
+        expect:
+          - statusCode: 400
+          - hasProperty: "error"
+          - equals: ["error", "Product ID is too long"]
+
+  - name: "API request with edge case: special characters in productId"
+    flow:
+      - get:
+          url: "/products/{{ $randomString(10, 'abcdefghijklmnopqrstuvwxyz!@#$%^&*()-_=+[]{}|;:,.<>?') }}"
+          headers:
+            Content-Type: "application/json"
+        expect:
+          - statusCode: 400
+          - hasProperty: "error"
+          - equals: ["error", "Invalid characters in product ID"]
