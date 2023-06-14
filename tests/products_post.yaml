@@ -1,0 +1,69 @@
+config:
+  target: "https://example.com/api"
+  phases:
+    - duration: 60
+      arrivalRate: 5
+
+scenarios:
+  - name: "Successful API request"
+    flow:
+      - post:
+          url: "/products"
+          json:
+            id: 3
+            name: "apple123"
+            description: "apple123"
+            price: 50.0
+          headers:
+            Content-Type: "application/json"
+          capture:
+            json: "$"
+            as: "response"
+      - think: 1
+      - assert:
+          - statusCode: 200
+          - response.id: 3
+          - response.name: "apple123"
+          - response.description: "apple123"
+          - response.price: 50.0
+
+  - name: "API request with validation failure"
+    flow:
+      - post:
+          url: "/products"
+          json:
+            id: 3
+            name: ""
+            description: "apple123"
+            price: 50.0
+          headers:
+            Content-Type: "application/json"
+          capture:
+            json: "$"
+            as: "response"
+      - think: 1
+      - assert:
+          - statusCode: 400
+          - response.error: "Name field is required"
+
+  - name: "API request with edge case"
+    flow:
+      - post:
+          url: "/products"
+          json:
+            id: 3
+            name: "漢字"
+            description: "特殊文字"
+            price: 9.99999999999E9
+          headers:
+            Content-Type: "application/json"
+          capture:
+            json: "$"
+            as: "response"
+      - think: 1
+      - assert:
+          - statusCode: 200
+          - response.id: 3
+          - response.name: "漢字"
+          - response.description: "特殊文字"
+          - response.price: 9.99999999999E9

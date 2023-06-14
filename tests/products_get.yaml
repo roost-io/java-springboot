@@ -1,0 +1,47 @@
+config:
+  target: "http://example.com/api"
+  phases:
+    - duration: 60
+      arrivalRate: 10
+
+scenarios:
+  - name: "Successful API request"
+    flow:
+      - get:
+          url: "/products"
+          headers:
+            Content-Type: "application/json"
+        capture:
+          json: "$.products"
+          as: "products"
+      - log: "Retrieved {{ products.length }} products"
+      - think: 1
+
+  - name: "API request with validation failure"
+    flow:
+      - post:
+          url: "/products"
+          headers:
+            Content-Type: "application/json"
+          json:
+            invalidField: "test"
+        expect:
+          - statusCode: 400
+          - hasProperty: "errorMessage"
+      - think: 1
+
+  - name: "API request with edge case"
+    flow:
+      - post:
+          url: "/products"
+          headers:
+            Content-Type: "application/json"
+          json:
+            name: "Product with special characters: !@#$%^&*()"
+            description: "This is a product with special characters in its name."
+        expect:
+          - statusCode: 201
+          - hasProperty: "id"
+          - hasProperty: "name"
+          - hasProperty: "description"
+      - think: 1
