@@ -10,7 +10,7 @@ scenarios:
   - name: "Successful API request"
     flow:
       - get:
-          url: "/"
+          url: "/6"
           headers:
             Content-Type: "application/json"
           capture:
@@ -20,7 +20,7 @@ scenarios:
             - statusCode: 200
             - equals:
                 - "{{ response }}"
-                - [{"id": 1, "name": "Product A"}, {"id": 2, "name": "Product B"}]
+                - {"id": 6, "name": "Product F"}
 
   - name: "API request with validation failure"
     flow:
