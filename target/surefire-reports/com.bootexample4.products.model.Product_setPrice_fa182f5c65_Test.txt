@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.bootexample4.products.model.Product_setPrice_fa182f5c65_Test
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.071 s - in com.bootexample4.products.model.Product_setPrice_fa182f5c65_Test
