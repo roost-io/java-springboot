@@ -1,0 +1,10 @@
+<dependencies>
+    ...
+    <dependency>
+        <groupId>com.bootexample4.products</groupId>
+        <artifactId>service</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <scope>test</scope>
+    </dependency>
+    ...
+</dependencies>
