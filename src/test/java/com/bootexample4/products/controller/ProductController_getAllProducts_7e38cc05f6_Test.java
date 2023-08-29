@@ -29,15 +29,23 @@ public class ProductController_getAllProducts_7e38cc05f6_Test {
     @Test
     public void testGetAllProducts_Success() {
         List<Product> products = new ArrayList<>();
-        products.add(new Product(1L, "Product 1", 100.0));
-        products.add(new Product(2L, "Product 2", 200.0));
+        Product product1 = new Product();
+        product1.setId(1L);
+        product1.setName("Product 1");
+        product1.setPrice(100.0);
+        products.add(product1);
+
+        Product product2 = new Product();
+        product2.setId(2L);
+        product2.setName("Product 2");
+        product2.setPrice(200.0);
+        products.add(product2);
 
         when(productRepository.findAll()).thenReturn(products);
 
-        ResponseEntity<List<Product>> response = productController.getAllProducts();
+        List<Product> response = productController.getAllProducts();
 
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(products, response.getBody());
+        assertEquals(products, response);
     }
 
     @Test
@@ -46,9 +54,8 @@ public class ProductController_getAllProducts_7e38cc05f6_Test {
 
         when(productRepository.findAll()).thenReturn(products);
 
-        ResponseEntity<List<Product>> response = productController.getAllProducts();
+        List<Product> response = productController.getAllProducts();
 
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(products, response.getBody());
+        assertEquals(products, response);
     }
 }
