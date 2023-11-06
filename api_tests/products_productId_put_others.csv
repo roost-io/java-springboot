@@ -1,0 +1,18 @@
+id,name,description,price
+34,Emma Jones,A splendid description! , 25
+26,John Smith, Leave this empty intentionally, 55
+Daniel Brown, Very nice product, A description that is a number, 40
+-100, Olga Kharitonova, A negative ID which is illogical!, 0
+Very Large number as an ID, Ellie Sanders, Another untraditional ID choice, Cant put prices in text
+7842, Anita Jernigan, , 1
+, Vinay Pathak, Skipping the ID this time, 377
+Random String ID, Jessica Potts, Using a string as the ID, 1337.99
+8832, Ken Adams, , 
+23287, Zarah Little, This is an example of a very long description, Using strings instead of numbers for the price
+78293, Rahul Patel, A standard value for the description, 35
+Just putting the name and leaving the rest blank, , , 
+42,Reginald Mckenzie, Your usual description, 49.98
+835,Tabitha Perry, Creating more dummy data for the CSV file, 64.99
+Instant noodles, Megan Mann, Using a product name as the ID, -30
+Diet Coke, Ava Turner, A price that has gone into negative, 12.5
+1000, Dale Dawson, , Negative number for price
