@@ -1,0 +1,8 @@
+id,name,description,price
+123,John Doe,This is a description,20.5
+,Emily,,50
+789,Michael,Another description,
+456,Emma,Yet another description,100
+abc,David,This is a different description,200.5
+xyz,,This is a unique description,150
+,Oliver,This is the final description,300

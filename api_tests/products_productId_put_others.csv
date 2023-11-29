@@ -1,0 +1,21 @@
+id,name,description,price
+1,Chips,Lays,120.0
+2,Apple,Red Apples,60.0
+3,,Fresh Oranges,45.0
+4,Pear,Green Pears,
+5,Watermelon,Fresh Watermelons,25.0
+6,Banana,,20.0
+7,Strawberry,Fresh Strawberries,30.0
+8,Kiwi,Fresh Kiwis,40.0
+9,Pineapple,Fresh Pineapples,
+10,Grapes,Purple Grapes,35.0
+11,Blueberries,Fresh Blueberries,50.0
+12,Peach,Fresh Peaches,55.0
+13,,Red Cherries,65.0
+14,Plum,Purple Plums,
+15,Blackberries,Fresh Blackberries,70.0
+16,Raspberry,Fresh Raspberries,75.0
+17,,Yellow Mangoes,80.0
+18,Avocado,Green Avocados,
+19,Pomegranate,Fresh Pomegranates,85.0
+20,,Fresh Guavas,90.0

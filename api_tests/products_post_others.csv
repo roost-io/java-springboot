@@ -1,0 +1,13 @@
+id,name,description,price
+9,Chips,Chips,120.0
+5,,
+9,new Chips,new Chips,120.0
+6,,
+4,,,
+,John Doe,An average guy,500.0
+7,Jane Doe,A not so average girl,
+8,Random Product,Just a random product,1000.0
+10,Another Random Product,,
+11,,Another random description,1500.0
+12,Yet Another Product,Yet another description,
+,Final Product,The final product in the list,2000.0
