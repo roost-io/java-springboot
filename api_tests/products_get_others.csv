@@ -1,0 +1,11 @@
+productId,invalidProductId,statusCode
+1234,abcd,200
+4567,fgkj,404
+7890,hnop,500
+1357,jklm,200
+2468,nmop,404
+3690,qrst,500
+1012,uvwx,200
+1314,yzab,404
+1718,cdef,500
+2023,ghij,405
