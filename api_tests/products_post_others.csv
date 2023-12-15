@@ -1,0 +1,11 @@
+id,name,description,price
+1,Apple,This is a tasty apple,10
+2,Banana,This is a ripe banana,15
+3,,This is a sweet orange,20
+4,Pear,This is a juicy pear,25
+5,Pineapple,,30
+6,Mango,This is a delicious mango,35
+7,Blueberry,This is a fresh blueberry,40
+8,,,
+9,Kiwi,This is a tangy kiwi,50
+10,Strawberry,This is a sweet strawberry,55

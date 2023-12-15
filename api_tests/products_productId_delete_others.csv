@@ -1,0 +1,12 @@
+404
+{ description: 'Not Found' }
+{ description: 'Item Not Found' }
+{ description: 'User Not Found' }
+{ description: 'Page Not Found' }
+{ description: 'Product Not Found' }
+{ description: 'Service Not Found' }
+{ description: 'Record Not Found' }
+{ description: 'Data Not Found' }
+{ description: 'File Not Found' }
+{ description: 'Path Not Found' }
+{ description: 'Resource Not Found' }
