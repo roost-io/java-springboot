@@ -1,0 +1,11 @@
+id,name,description,price
+1,apple,description of the product,20
+2,banana,another product description,30
+3,orange,,50
+4,pear,product description,40
+5,grape,description for grape,60
+6,watermelon,description for watermelon,70
+7,kiwi,description for kiwi,90
+8,strawberry,description for strawberry,100
+9,blueberry,description for blueberry,110
+10,pineapple,description for pineapple,120
