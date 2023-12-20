@@ -1,0 +1,11 @@
+productId,id,name,description,price,statusCode
+1001,1,Product1,This is product 1,20.99,200
+1002,2,Product2,This is product 2,30.99,200
+1003,3,Product3,This is product 3,40.99,200
+1004,4,Product4,This is product 4,50.99,200
+1005,5,Product5,This is product 5,60.99,200
+1006,6,Product6,This is product 6,70.99,200
+1007,7,Product7,This is product 7,80.99,200
+1008,8,Product8,This is product 8,90.99,200
+1009,9,Product9,This is product 9,100.99,200
+1010,10,Product10,This is product 10,110.99,200
