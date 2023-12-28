@@ -1,0 +1,4 @@
+name,id,description,price,statusCode,scenario
+orange,20,citrus fruit,50,200,Successful response
+apple,10,description of the product,20,200,Successful responses: OK
+apple,10,description of the product,20,405,Client error responses: Method Not Allowed
