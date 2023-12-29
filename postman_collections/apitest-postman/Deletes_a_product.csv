@@ -1,0 +1,11 @@
+productId,statusCode,scenario
+12345,200,Successful responses: OK
+67890,200,Successful responses: OK
+11223,200,Successful responses: OK
+44556,200,Successful responses: OK
+78899,200,Successful responses: OK
+23456,404,Client error responses: Not Found
+78901,404,Client error responses: Not Found
+22334,404,Client error responses: Not Found
+55678,404,Client error responses: Not Found
+89900,404,Client error responses: Not Found
