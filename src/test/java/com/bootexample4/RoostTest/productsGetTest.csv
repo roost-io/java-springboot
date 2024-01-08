@@ -1,0 +1,11 @@
+ID,Date,Time,Thread,Logger,Level,Message
+1,22-06-2023,05:52:26,main,c.b.products.ProductsApplication.logStarting,INFO,Starting ProductsApplication v0.0.1-SNAPSHOT using Java 17.0.7 with PID 7399
+2,22-06-2023,05:53:53,http-nio-8080-exec-3,c.b.p.controller.ProductController.createProduct,INFO,POST /api/products - Created product with ID: 1
+3,22-06-2023,05:54:08,http-nio-8080-exec-4,c.b.p.controller.ProductController.createProduct,INFO,POST /api/products - Created product with ID: 2
+4,22-06-2023,05:55:04,http-nio-8080-exec-7,c.b.p.controller.ProductController.createProduct,INFO,POST /api/products - Created product with ID: 3
+5,22-06-2023,05:55:35,http-nio-8080-exec-9,c.b.p.controller.ProductController.deleteProduct,INFO,DELETE /api/products/3 - Deleting product
+6,22-06-2023,05:55:35,http-nio-8080-exec-9,c.b.p.controller.ProductController.lambda$deleteProduct$4,INFO,DELETE /api/products/3 - Deleted product
+7,22-06-2023,06:13:32,http-nio-8080-exec-4,c.b.p.controller.ProductController.createProduct,INFO,POST /api/products - Created product with ID: 4
+8,22-06-2023,06:16:28,http-nio-8080-exec-7,c.b.p.controller.ProductController.deleteProduct,INFO,DELETE /api/products/3 - Deleting product
+9,22-06-2023,06:16:33,http-nio-8080-exec-8,c.b.p.controller.ProductController.deleteProduct,INFO,DELETE /api/products/2 - Deleting product
+10,22-06-2023,06:16:33,http-nio-8080-exec-8,c.b.p.controller.ProductController.lambda$deleteProduct$4,INFO,DELETE /api/products/2 - Deleted product
