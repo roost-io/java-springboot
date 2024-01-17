@@ -1,0 +1,4 @@
+CSVHeader,CSVHeader
+productId,name,id,description,price,statusCode,scenario
+,apple,10,description of the product,20,200,Updated Product
+,apple,10,description of the product,20,404,Not Found
