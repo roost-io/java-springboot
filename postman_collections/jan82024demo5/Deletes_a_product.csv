@@ -1,0 +1,11 @@
+productId,statusCode,scenario
+1,200,Product deleted
+1,404,Not Found
+2,200,Product deleted
+2,404,Not Found
+3,200,Product deleted
+3,404,Not Found
+4,200,Product deleted
+4,404,Not Found
+5,200,Product deleted
+5,404,Not Found
