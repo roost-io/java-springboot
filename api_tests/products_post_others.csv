@@ -1,0 +1,11 @@
+id,name,description,price
+1,apple,description of the product,20
+2,banana,description of the product two,/
+3,orange,description of the product three,not integer
+,,description of the product four,40
+5,pear,description of the product five,50
+6,peach,'description with, comma',60
+/berry,description of the product seven,
+8,mango,description of the product eight,80
+9,guava,description of the product nine,90
+10,kiwi,description of the product ten,100
