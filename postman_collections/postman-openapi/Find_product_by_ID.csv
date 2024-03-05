@@ -1,4 +1,5 @@
 productId,statusCode,scenario
+99,404,Product not found
 1,200,successful operation
 2,200,successful operation
 10,404,Product not found
