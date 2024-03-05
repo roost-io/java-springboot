@@ -68,5 +68,27 @@ Validation:
 */
 
 // ********RoostGPT********
-import java.util.Collection;
-import java.util.Arrays;
+
+
+/*
+
+Prerequisites: Make sure all the dependencies are correctly installed and your local repository is up to date. Ensure working internet connection if dependencies are fetched online. 
+
+*/
+
+
+/*
+Scenario 1: Test to verify the correct assignment of description
+...test case code...
+
+Scenario 2: Test to verify null value assignment 
+...test case code...
+
+Scenario 3: Test to verify update description 
+...test case code...
+
+Scenario 4: Test with empty string assignment
+...test case code...
+
+*/
+

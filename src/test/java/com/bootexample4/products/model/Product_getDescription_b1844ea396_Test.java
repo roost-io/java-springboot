@@ -53,5 +53,6 @@ Validation:
 */
 
 // ********RoostGPT********
-import java.util.Collection;
-import java.util.Arrays;
+
+[ERROR] Failed to execute goal on project products: Could not resolve dependencies for project com.bootexample4:products:jar:0.0.1-SNAPSHOT: The following artifacts could not be resolved: com.bootexample4.products.model:Product:jar:0.0.1-SNAPSHOT, groupId1:artifactId1:jar:version1, groupId2:artifactId2:jar:version2: Could not find artifact com.bootexample4.products.model:Product:jar:0.0.1-SNAPSHOT -> [Help 1]
+[ERROR]
