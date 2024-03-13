@@ -1,0 +1,5 @@
+productId,name,id,description,price,statusCode,scenario
+1,Chips,1,Lays,120,200,Updated Product
+1,Chips,1,Lays,120,404,Not Found
+567,randomItem,26,some description,300,200,Updated Product
+465,randomItem,98,some description,150,404,Not Found
