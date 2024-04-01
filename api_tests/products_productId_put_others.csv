@@ -1,0 +1,11 @@
+id,wrongName,wrongDescription,wrongPrice
+1,Chips,Lays,120.0
+2,Banana,Chiquita Apple,1000
+3,/,/A weird name with slash,/10
+4,'Apple',A tasty fruit,Your price
+5,007,A name not an id,9.99
+6,Orange, fresh orange,A negative price -5
+7,Empty string,,12
+8,Chips,Lays,Repeated ID
+9,12345678,Very long id,22
+10,Pepsi,Soft drink,price in words
