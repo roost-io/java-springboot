@@ -1,0 +1,26 @@
+-------------------------------------------------------------------------------
+Test set: com.bootexample4.products.controller.ProductControllerUpdateProductTest
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 0.022 s <<< FAILURE! - in com.bootexample4.products.controller.ProductControllerUpdateProductTest
+updateProductWithEmptyRequestBody  Time elapsed: 0 s  <<< FAILURE!
+org.mockito.exceptions.verification.NeverWantedButInvoked: 
+
+productRepository.findById(1L);
+Never wanted here:
+-> at com.bootexample4.products.controller.ProductControllerUpdateProductTest.updateProductWithEmptyRequestBody(ProductControllerUpdateProductTest.java:228)
+But invoked here:
+-> at com.bootexample4.products.controller.ProductController.updateProduct(ProductController.java:38) with arguments: [1]
+
+	at com.bootexample4.products.controller.ProductControllerUpdateProductTest.updateProductWithEmptyRequestBody(ProductControllerUpdateProductTest.java:228)
+
+updateProductWithInvalidId  Time elapsed: 0.005 s  <<< FAILURE!
+org.mockito.exceptions.verification.NeverWantedButInvoked: 
+
+productRepository.findById(-1L);
+Never wanted here:
+-> at com.bootexample4.products.controller.ProductControllerUpdateProductTest.updateProductWithInvalidId(ProductControllerUpdateProductTest.java:217)
+But invoked here:
+-> at com.bootexample4.products.controller.ProductController.updateProduct(ProductController.java:38) with arguments: [-1]
+
+	at com.bootexample4.products.controller.ProductControllerUpdateProductTest.updateProductWithInvalidId(ProductControllerUpdateProductTest.java:217)
+
