@@ -77,6 +77,8 @@ org.opentest4j.AssertionFailedError: Expected java.lang.IllegalArgumentException
 [INFO] 
 
 ```
+
+roost_feedback [5/7/2024, 1:31:43 PM]:comment out the test getProductByIdNull()
 */
 
 // ********RoostGPT********
@@ -144,11 +146,11 @@ public class ProductControllerGetProductByIdTest {
         assertThat(response.getBody()).isNull();
     }
 
-	@Test
-	void getProductByIdNull() {
-		// Act & Assert
-		assertThrows(IllegalArgumentException.class, () -> productController.getProductById(null));
-	}
+	// @Test
+	// void getProductByIdNull() {
+	// 	// Act & Assert
+	// 	assertThrows(IllegalArgumentException.class, () -> productController.getProductById(null));
+	// }
 
 	@Test
     void getProductByIdRepositoryError() {
