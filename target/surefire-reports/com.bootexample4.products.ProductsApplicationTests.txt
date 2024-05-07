@@ -1,0 +1,10 @@
+-------------------------------------------------------------------------------
+Test set: com.bootexample4.products.ProductsApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 11.865 s <<< FAILURE! - in com.bootexample4.products.ProductsApplicationTests
+testCreate  Time elapsed: 1.612 s  <<< ERROR!
+org.mockserver.client.netty.SocketConnectionException: Unable to connect to socket /127.0.0.1:3000
+	at com.bootexample4.products.ProductsApplicationTests.testCreate(ProductsApplicationTests.java:24)
+Caused by: io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: /127.0.0.1:3000
+Caused by: java.net.ConnectException: Connection refused
+

@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: com.bootexample4.products.controller.ProductControllerGetAllProductsTest
+-------------------------------------------------------------------------------
+Tests run: 4, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.065 s <<< FAILURE! - in com.bootexample4.products.controller.ProductControllerGetAllProductsTest
+getAllProductsReturnsUnmodifiableList  Time elapsed: 0.022 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: Expected java.lang.UnsupportedOperationException to be thrown, but nothing was thrown.
+	at com.bootexample4.products.controller.ProductControllerGetAllProductsTest.getAllProductsReturnsUnmodifiableList(ProductControllerGetAllProductsTest.java:136)
+

@@ -1,0 +1,15 @@
+-------------------------------------------------------------------------------
+Test set: com.bootexample4.products.controller.ProductControllerDeleteProductTest
+-------------------------------------------------------------------------------
+Tests run: 4, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.656 s <<< FAILURE! - in com.bootexample4.products.controller.ProductControllerDeleteProductTest
+deleteProductWithNullId  Time elapsed: 0.025 s  <<< FAILURE!
+org.mockito.exceptions.verification.NeverWantedButInvoked: 
+
+productRepository.findById(<any>);
+Never wanted here:
+-> at com.bootexample4.products.controller.ProductControllerDeleteProductTest.deleteProductWithNullId(ProductControllerDeleteProductTest.java:139)
+But invoked here:
+-> at com.bootexample4.products.controller.ProductController.deleteProduct(ProductController.java:49) with arguments: [null]
+
+	at com.bootexample4.products.controller.ProductControllerDeleteProductTest.deleteProductWithNullId(ProductControllerDeleteProductTest.java:139)
+
