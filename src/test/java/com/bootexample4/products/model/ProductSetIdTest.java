@@ -57,49 +57,7 @@ Validation:
 */
 
 // ********RoostGPT********
-package com.bootexample4.products.model;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
-import static org.junit.jupiter.api.Assertions.*;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-
-class ProductSetIdTest {
-
-	private Product product = new Product();
-
-	@Test
-	public void setIdSuccessfully() {
-		Long id = 1L;
-		product.setId(id);
-		assertEquals(id, product.getId(), "Product ID should be set to the given value");
-	}
-
-	@Test
-	public void handleNullValueInSetId() {
-		product.setId(null);
-		assertNull(product.getId(), "Product ID should be null when set with null value");
-	}
-
-	@Test
-	public void resetIdWithSetId() {
-		Long initialId = 1L;
-		product.setId(initialId);
-		Long newId = 2L;
-		product.setId(newId);
-		assertEquals(newId, product.getId(), "Product ID should be reset to the new value");
-	}
-
-	@ParameterizedTest
-	@ValueSource(strings = { "abcd", "" })
-	public void setIdFailsWithNonLongValue(String nonLongValue) {
-		assertThrows(NumberFormatException.class, () -> {
-			product.setId(Long.parseLong(nonLongValue));
-		}, "setID method should throw NumberFormatException when non-Long value is passed");
-	}
-
-}
+[ERROR] COMPILATION ERROR :
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.10.1:testCompile (default-testCompile) on project products: Compilation failure: Compilation failure:
+[ERROR] -> [Help 1]

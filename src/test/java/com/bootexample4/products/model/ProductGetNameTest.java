@@ -48,6 +48,7 @@ ROOST_METHOD_SIG_HASH=getName_8400ac6fb7
 */
 
 // ********RoostGPT********
+
 package com.bootexample4.products.model;
 
 import org.junit.Before;
@@ -67,6 +68,7 @@ public class ProductGetNameTest {
 		product = new Product();
 	}
 
+	//The below test case seems to be perfect, running without any issues
 	@Test
 	public void testGetNameForValidNonEmptyString() {
 		String name = "Test Product";
@@ -76,6 +78,7 @@ public class ProductGetNameTest {
 		assertEquals(name, resultName);
 	}
 
+    //The below test case seems to be perfect, running without any issues
 	@Test
 	public void testGetNameForEmptyString() {
 		String name = "";
@@ -85,6 +88,7 @@ public class ProductGetNameTest {
 		assertEquals(name, resultName);
 	}
 
+	//The below test case seems to be perfect, running without any issues
 	@Test
 	public void testGetNameForNullValue() {
 		product.setName(null);

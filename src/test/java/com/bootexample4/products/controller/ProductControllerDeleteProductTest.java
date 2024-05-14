@@ -40,7 +40,6 @@ Validation:
 */
 
 // ********RoostGPT********
-package com.bootexample4.products.controller;
 
 import com.bootexample4.products.model.Product;
 import com.bootexample4.products.repository.ProductRepository;
@@ -52,8 +51,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import java.util.Optional;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -75,10 +72,10 @@ public class ProductControllerDeleteProductTest {
 		product.setName("Test Product");
 		product.setDescription("Test Product Description");
 		product.setPrice(100.0);
-		// TODO: For subsequent tests, modify the identifiers and parameters to suit your
-		// scenario.
+		// TODO: For subsequent tests, modify the identifiers and parameters to suit your scenario.
 	}
 
+  // if you detect issue here, comment out this test case and add explanatory comment
 	@Test
     public void deleteExistingProduct() {
         when(productRepository.findById(1L)).thenReturn(Optional.of(Mockito.mock(Product.class)));
@@ -87,16 +84,18 @@ public class ProductControllerDeleteProductTest {
         verify(productRepository, times(1)).delete(any());
     }
 
+  // if you detect issue here, comment out this test case and add explanatory comment
 	@Test
-    public void deleteNonExistingProduct() {
+  	public void deleteNonExistingProduct() {
         when(productRepository.findById(1L)).thenReturn(Optional.empty());
         ResponseEntity<Object> responseEntity = productController.deleteProduct(1L);
         assertEquals(404, responseEntity.getStatusCodeValue());
         verify(productRepository, times(0)).delete(any());
     }
 
+  // if you detect issue here, comment out this test case and add explanatory comment
 	@Test(expected = RuntimeException.class)
-    public void deleteProductRepositoryException() {
+ 	public void deleteProductRepositoryException() {
         when(productRepository.findById(anyLong())).thenThrow(new RuntimeException("Exception occurred"));
         productController.deleteProduct(1L);
         verify(productRepository, times(0)).delete(any());

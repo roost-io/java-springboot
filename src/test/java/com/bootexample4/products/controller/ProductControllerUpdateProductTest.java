@@ -55,17 +55,34 @@ Validation:
 */
 
 // ********RoostGPT********
-@Test
-public void testUpdateProductWithNullDetails() {
-    Product updatedProduct = new Product();
-    updatedProduct.setName(null);
-    updatedProduct.setDescription(null);
-    updatedProduct.setPrice(-1.0);
-    when(productRepository.findById(productId)).thenReturn(Optional.of(product));
-    when(productRepository.save(any(Product.class))).thenReturn(updatedProduct);
-    ResponseEntity<Product> response = productController.updateProduct(productId, updatedProduct);
-    assertEquals(200, response.getStatusCodeValue());
-    assertEquals(null, response.getBody().getName());
-    assertEquals(null, response.getBody().getDescription());
-    assertTrue(response.getBody().getPrice() == -1.0);
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.junit.MockitoJUnitRunner;
+import static org.junit.Assert.*;
+....
+
+@RunWith(MockitoJUnitRunner.class)
+public class YourTestClass {
+
+    ....
+
+    // Eeverything above this looks fine, now comes your test case
+    @Test
+    public void testUpdateProductWithNullDetails() {
+        Product updatedProduct = new Product();
+        updatedProduct.setName(null);
+        updatedProduct.setDescription(null);
+        updatedProduct.setPrice(-1.0);
+        when(productRepository.findById(productId)).thenReturn(Optional.of(product));
+        when(productRepository.save(any(Product.class))).thenReturn(updatedProduct);
+        ResponseEntity<Product> response = productController.updateProduct(productId, updatedProduct);
+        assertEquals(200, response.getStatusCodeValue());
+        assertEquals(null, response.getBody().getName());
+        assertEquals(null, response.getBody().getDescription());
+        assertTrue(response.getBody().getPrice() == -1.0);
+    }
+
+    ....
+  
 }

@@ -55,79 +55,52 @@ Details:
 */
 
 // ********RoostGPT********
-package com.bootexample4.products.controller;
 
-import com.bootexample4.products.model.Product;
-import com.bootexample4.products.repository.ProductRepository;
-import org.junit.Test;
-import org.junit.Before;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.beans.factory.annotation.Autowired;
+ 
+@Test
+public void testWhenProductRepositoryIsEmpty() {
+    // The test case might fail if the mock operation does not set up accurately.
+    // Arrange
+    given(productRepository.findAll()).willReturn(Collections.emptyList());
+    // Act
+    List<Product> actualProducts = productController.getAllProducts();
+    // Assert
+    assertTrue(actualProducts.isEmpty());
+}
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+@Test
+public void testWhenProductRepositoryContainsData() {
+    // This test case might fail if the Product object is not properly initialized.
+    // Arrange
+    Product product = new Product();
+    given(productRepository.findAll()).willReturn(Arrays.asList(product, product));
+    // Act
+    List<Product> actualProducts = productController.getAllProducts();
+    // Assert
+    assertEquals(2, actualProducts.size());
+}
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.BDDMockito.given;
+@Test
+public void testResponseObjectInTheReturnedList() {
+    // This test case might fail if the Product object is not properly initialized.
+    // Arrange
+    Product product = new Product();
+    given(productRepository.findAll()).willReturn(Arrays.asList(product));
+    // Act
+    List<Product> actualProducts = productController.getAllProducts();
+    // Assert
+    for (Object object : actualProducts) {
+        assertTrue(object instanceof Product);
+    }
+}
 
-@RunWith(JUnit4.class)
-@SpringBootTest
-class ProductControllerGetAllProductsTest {
-
-	@MockBean
-	private ProductRepository productRepository;
-
-	@Autowired // Injecting dependency of ProductController
-	private ProductController productController;
-
-	@Test
-	public void testWhenProductRepositoryIsEmpty() {
-		// Arrange
-		given(productRepository.findAll()).willReturn(Collections.emptyList());
-		// Act
-		List<Product> actualProducts = productController.getAllProducts();
-		// Assert
-		assertTrue(actualProducts.isEmpty());
-	}
-
-	@Test
-	public void testWhenProductRepositoryContainsData() {
-		// Arrange
-		Product product = new Product();
-		given(productRepository.findAll()).willReturn(Arrays.asList(product, product));
-		// Act
-		List<Product> actualProducts = productController.getAllProducts();
-		// Assert
-		assertEquals(2, actualProducts.size());
-	}
-
-	@Test
-	public void testResponseObjectInTheReturnedList() {
-		// Arrange
-		Product product = new Product();
-		given(productRepository.findAll()).willReturn(Arrays.asList(product));
-		// Act
-		List<Product> actualProducts = productController.getAllProducts();
-		// Assert
-		for (Object object : actualProducts) {
-			assertTrue(object instanceof Product);
-		}
-	}
-
-	@Test
-	public void testWhenProductRepositoryReturnsNull() {
-		// Arrange
-		given(productRepository.findAll()).willReturn(null);
-		// Act
-		List<Product> actualProducts = productController.getAllProducts();
-		// Assert
-		assertNotNull(actualProducts);
-	}
-
+@Test
+public void testWhenProductRepositoryReturnsNull() {
+    // The test case might fail if the mock operation does not set up accurately.
+    // Arrange
+    given(productRepository.findAll()).willReturn(null);
+    // Act
+    List<Product> actualProducts = productController.getAllProducts();
+    // Assert
+    assertNotNull(actualProducts);
 }

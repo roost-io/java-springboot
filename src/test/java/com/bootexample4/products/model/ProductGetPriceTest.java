@@ -55,6 +55,7 @@ This test ensures the getPrice() method operates within acceptable parameters, a
 */
 
 // ********RoostGPT********
+
 package com.bootexample4.products.model;
 
 import org.junit.Before;

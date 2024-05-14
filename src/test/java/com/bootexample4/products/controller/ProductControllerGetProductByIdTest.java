@@ -51,6 +51,7 @@ This test is to verify the retrieval behavior for deleted products in the app. I
 */
 
 // ********RoostGPT********
+
 package com.bootexample4.products.controller;
 
 import com.bootexample4.products.model.Product;
@@ -58,16 +59,18 @@ import com.bootexample4.products.repository.ProductRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.http.ResponseEntity;
 import java.util.Optional;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 public class ProductControllerGetProductByIdTest {
 
-	@Autowired
+	// DO NOT use Autowired in tests, use Mockito's @Mock.
+	// @Autowired
+	@Mock
 	private ProductRepository productRepository;
 
 	private ProductController productController;
@@ -75,6 +78,8 @@ public class ProductControllerGetProductByIdTest {
 	@BeforeEach
 	public void setUp() {
 		productController = new ProductController();
+		// Set the mock here to the instance of productController. (manually injecting the mock into the instance of the object to be tested)
+		ReflectionTestUtils.setField(productController, "productRepository", productRepository);
 	}
 
 	@Test
