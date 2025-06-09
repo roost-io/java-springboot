@@ -1,0 +1,9 @@
+productId,statusCode,scenario  
+1234567890,200,successful operation
+9876543210,200,successful operation
+1111111111,404,Product not found
+2222222222,404,Product not found
+3333333333,200,successful operation
+4444444444,200,successful operation
+9999999999,404,Product not found
+5555555555,404,Product not found

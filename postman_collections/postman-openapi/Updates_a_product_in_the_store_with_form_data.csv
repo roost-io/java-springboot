@@ -1,0 +1,7 @@
+productId,name_*string,id_*long,description_*string,price_*long,statusCode,scenario
+1001,apple,10,description of the product,20,200,Updated Product
+1002,orange,15,citrus fruit,30,200,Updated Product
+1003,banana,20,yellow fruit,40,200,Updated Product
+INVALID_ID^|INV_NAME,-1,INVALID_DESC,-999,404,Not Found
+NON_NUM_ID^|XYZ,-5,NULL_PRODUCT,-20,404,Not Found
+BAD_PID^|FOO,-2^|UNKNOWN_ITEM,-330,404,Not Found

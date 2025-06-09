@@ -1,0 +1,8 @@
+name_*string,id_*long,description_*string,price_*long,statusCode,scenario
+apple,10,description of the product,20,200,Successful operation
+banana,15,fresh and ripe fruit,25,200,Successful operation
+cherry,20,small red fruit,30,200,Successful operation
+pear,25,sweet green fruit,35,200,Successful operation
+invalid_name,abc,invalid description with numbers 123,-10,405,Invalid input
+invalid123,!@#,!@#$%^&*,"1000",405,Invalid input
+nullValue,null,broken description###,20984,405,Invalid input
