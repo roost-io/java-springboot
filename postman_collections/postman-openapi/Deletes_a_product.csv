@@ -1,0 +1,11 @@
+productId,statusCode,scenario
+123456,200,Product deleted
+789012,200,Product deleted
+345678,404,Not Found
+999999,404,Not Found
+111213,200,Product deleted
+654321,404,Not Found
+246810,200,Product deleted
+777777,404,Not Found
+314159,200,Product deleted
+987654,404,Not Found
