@@ -1,0 +1,47 @@
+[
+  {
+    "productId": "prod-101",
+    "name": "apple",
+    "id": 10,
+    "description": "description of the product",
+    "price": 20,
+    "statusCode": 200,
+    "scenario": "Updated Product"
+  },
+  {
+    "productId": "prod-102",
+    "name": "orange",
+    "id": 15,
+    "description": "A juicy citrus fruit",
+    "price": 25,
+    "statusCode": 200,
+    "scenario": "Updated Product"
+  },
+  {
+    "productId": "prod-xyz",
+    "name": "not_a_product",
+    "id": -9999,
+    "description": "random_string",
+    "price": -1,
+    "statusCode": 404,
+    "scenario": "Not Found"
+  },
+  {
+    "productId": "prod-abc",
+    "name": "",
+    "id": 999999999999999,
+    "description": "Invalid description with numbers 12345",
+    "price": 0,
+    "statusCode": 404,
+    "scenario": "Not Found"
+  },
+  {
+    "productId": "prod-103",
+    "name": "banana",
+    "id": 20,
+    "description": "A popular tropical fruit",
+    "price": 15,
+    "statusCode": 200,
+    "scenario": "Updated Product"
+  }
+]
