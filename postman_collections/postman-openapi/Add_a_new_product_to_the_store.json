@@ -1,0 +1,42 @@
+[
+  {
+    "name": "apple",
+    "id": 10,
+    "description": "Fresh apples from the orchard.",
+    "price": 20,
+    "statusCode": 200,
+    "scenario": "Successful operation"
+  },
+  {
+    "name": "orange",
+    "id": 15,
+    "description": "Organic oranges packed with vitamin C.",
+    "price": 30,
+    "statusCode": 200,
+    "scenario": "Successful operation"
+  },
+  {
+    "name": "invalid_name_*?",
+    "id": -1,
+    "description": "",
+    "price": -100,
+    "statusCode": 405,
+    "scenario": "Invalid input"
+  },
+  {
+    "name": "pear",
+    "id": 20,
+    "description": "Sweet yellow pears picked fresh.",
+    "price": 25,
+    "statusCode": 200,
+    "scenario": "Successful operation"
+  },
+  {
+    "name": "!",
+    "id": 10000000000000000000,
+    "description": "?",
+    "price": 0,
+    "statusCode": 405,
+    "scenario": "Invalid input"
+  }
+]
