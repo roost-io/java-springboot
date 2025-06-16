@@ -1,0 +1,47 @@
+[
+  {
+    "productId": "PRD001",
+    "name": "apple",
+    "id": 10,
+    "description": "description of the product",
+    "price": 20,
+    "statusCode": 200,
+    "scenario": "Updated Product"
+  },
+  {
+    "productId": "PRD002",
+    "name": "banana",
+    "id": 11,
+    "description": "fresh yellow bananas",
+    "price": 25,
+    "statusCode": 200,
+    "scenario": "Updated Product"
+  },
+  {
+    "productId": "invalid_id",
+    "name": "",
+    "id": -1,
+    "description": "",
+    "price": -20,
+    "statusCode": 404,
+    "scenario": "Not Found"
+  },
+  {
+    "productId": "PRDXX",
+    "name": "unknown",
+    "id": 0,
+    "description": "description is missing",
+    "price": 0,
+    "statusCode": 404,
+    "scenario": "Not Found"
+  },
+  {
+    "productId": "PRD003",
+    "name": "cherry",
+    "id": 12,
+    "description": "description of cherry product",
+    "price": 30,
+    "statusCode": 200,
+    "scenario": "Updated Product"
+  }
+]
